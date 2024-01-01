@@ -112,8 +112,6 @@ const Profile = () => {
             <Text style={{ textAlign: "center" }}>Logout</Text>
           </Pressable>
 
-          <Heading>Log Out</Heading>
-          < Ionicons name="arrow-forward"></ Ionicons>
         </HStack>
       </Box>
     </SafeAreaView>

@@ -187,17 +187,17 @@ app.get("/get-products", async (req, res) => {
 });
 
 
-app.get("/search-products" , async (req,res) => {
-  try {
+// app.get("/search-products" , async (req,res) => {
+//   try {
 
-    const keyboard = req.query;
-    const products = await Products.findOne((keyboard));
+//     const keyboard = req.query;
+//     const products = await Products.findOne((keyboard));
     
-    res.status(200).json(products);
-  } catch (error) {
-    res.status(500).json({ message: "Error retrieveing the addresses" });
-  }
-});
+//     res.status(200).json(products);
+//   } catch (error) {
+//     res.status(500).json({ message: "Error retrieveing the addresses" });
+//   }
+// });
 
 
 // /
@@ -259,9 +259,10 @@ app.post("/orders", async (req, res) => {
     
     //create an array of product objects from the cart Items
     const products = cartItems.map((item) => ({
-      name: item?.name,
+      name: item.name,
       quantity: item.quantity,
       harga: item.harga,
+      image : item.image,
     }));
     
     //create a new Order
@@ -315,20 +316,6 @@ app.put("/addressesedit/:userId", async (req, res) => {
   }).then(user => res.json(user))
   .catch(err => res.json(err))
 })
-
-// app.delete("/addressesedit/:userId",async(req,res) => {
-//   try{
-//     const userId = req.params.userId;
-//     const address = await User.findOneAndDelete({addresses:userId}.populate("addresses"))
-//     if(!address){
-//       return res.status(404).json({message:"No orders found for this user"})
-//     }
-
-//     res.status(200).json({address});
-//   } catch(error){
-//     res.status(500).json({ message: "anjay"});
-//   }
-// })
 
 
 
