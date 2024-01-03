@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 const productSchema = new mongoose.Schema({
-    nama: {
+    name: {
         type: String,
         required: true,
     },
@@ -16,10 +16,6 @@ const productSchema = new mongoose.Schema({
     deskripsi: {
         type: String,
         required: true,
-    },
-    quantity : {
-        type:String,
-        required:true
     },
     image :{
         type: String, 

@@ -17,7 +17,7 @@ const Kategori = () => {
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const response = await axios.get("http://10.217.21.121:8000/get-products");
+        const response = await axios.get("http://10.214.120.94:8000/get-products");
         setProducts(response.data);
 
       } catch (error) {

@@ -6,26 +6,28 @@ import axios from 'axios';
 
 
 
-const Search = () => {
-    const [key, setKey] = useState("");
-    const [products, setProducts] = useState([]);
-    const [searchResult, setSearchResult] = useState([]);
+    const Search = () => {
+        const [key, setKey] = useState("");
+        const [products, setProducts] = useState([]);
+        const [searchResult, setSearchResult] = useState([]);
+    
+        useEffect(() => {
+            const search = async () => {
+              try {
+                if(!key.trim()){
+                    setSearchResult([])
+                    return
+                }
+                const response = await axios.get("http://192.168.0.50:8000/get-products",{params:{key,limit:5}});
+                console.log(response)
+            } catch (error) {
+                console.log("error fetching produk", error);
+              }
+            };
+            search();
+          }, [key]);
 
-    useEffect(() => {
-        const search = async () => {
-          try {
-            if(!key.trim()){
-                setSearchResult([])
-                return
-            }
-            const response = await axios.get("http://192.168.0.50:8000/get-products",{params:{key,limit:5}});
-            console.log(response)
-        } catch (error) {
-            console.log("error fetching produk", error);
-          }
-        };
-        search();
-      }, [key]);
+
 
 
 

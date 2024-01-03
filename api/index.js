@@ -173,10 +173,28 @@ app.get("/get-user", async (req, res) => {
   }
 });
 
+app.get("/search-products", async (req, res) => {
+  try {
+    const { key, limit, page } = req.query
+    const skip = (page - 1) * limit
+    const search = key ? {
+      "$or": [
+        { name: { $regex: key } },
+        { deskripsi: { $regex: key} },
+      ]
+    } : {}
+    const data = await Products.find(search).populate("harga").skip(skip).limit(limit)
+    res.json({ data })
+  } catch (err) {
+    console.log(err)
+  }
+})
+
 
 app.get("/get-products", async (req, res) => {
   try {
     const products = await Products.find();
+
 
     res.status(200).json(products);
   } catch (error) {
@@ -187,20 +205,6 @@ app.get("/get-products", async (req, res) => {
 });
 
 
-// app.get("/search-products" , async (req,res) => {
-//   try {
-
-//     const keyboard = req.query;
-//     const products = await Products.findOne((keyboard));
-
-//     res.status(200).json(products);
-//   } catch (error) {
-//     res.status(500).json({ message: "Error retrieveing the addresses" });
-//   }
-// });
-
-
-// /
 
 
 

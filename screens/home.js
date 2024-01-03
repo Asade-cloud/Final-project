@@ -1,4 +1,4 @@
-import { Heading, Image, Text, HStack, Center, Button, Pressable, View } from "native-base";
+import { Heading, Image, Text, HStack, Center } from "native-base";
 import { Box, ScrollView, Input, } from "native-base";
 import { TouchableOpacity } from "react-native";
 import { useNavigation } from "@react-navigation/native";
@@ -15,6 +15,26 @@ const Home = () => {
   const navigation = useNavigation();
   const [products, setProducts] = useState([]);
   const { userId, setUserId } = useContext(UserType)
+  const [searchResult, setSearchResult] = useState([])
+  const [key, setKey] = useState("")
+
+  useEffect(() => {
+    const search = async () => {
+      try {
+        if (!key.trim()) {
+          setSearchResult([])
+          return
+        }
+        const res = await axios.get("http://10.214.120.94:8000/search-products",{ params: { key: key, limit: 5 } })
+        setSearchResult(res.data.data)
+      } catch (err) {
+        console.log(err)
+      }
+    }
+    search()
+  }, [key])
+
+
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -31,7 +51,6 @@ const Home = () => {
       try {
         const response = await axios.get("http://10.214.120.94:8000/get-products");
         setProducts(response.data);
-        console.log(response)
       } catch (error) {
         console.log("error fetching produk", error);
       }
@@ -46,10 +65,25 @@ const Home = () => {
       <SafeAreaView>
         <ScrollView px={3}>
 
+
           <Box py={3}>
 
 
-            <Input placeholder="Apa Yang Anda Cari" w="100%" borderWidth={2} />
+            <Input placeholder="Apa Yang Anda Cari"
+              w="100%"
+              borderWidth={2}
+              value={key}
+              onChange={(e) => setKey(e.target.value)}
+            />
+            {searchResult && searchResult.length > 0 && (
+              <Box>
+                {searchResult.map(p => (
+                  <Box key={p._id}>
+                    <Text>{p.name}</Text>
+                  </Box>
+                ))}
+              </Box>
+            )}
           </Box>
 
           <Box
