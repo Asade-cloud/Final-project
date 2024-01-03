@@ -47,7 +47,7 @@ const AddressScreen = () => {
             kodePos
         }
 
-        axios.post("http://192.168.100.114:8000/addresses", { userId, address }).then((response) => {
+        axios.post("http://10.217.21.121:8000/addresses", { userId, address }).then((response) => {
             Alert.alert("Success", "Alamat Telah Ditambahkan");
             setName("");
             setNoRumah("");
@@ -148,6 +148,7 @@ const AddressScreen = () => {
                 <Button
                     backgroundColor={"green.400"}
                     onPress={handleAddAddress}
+                    h={35}
                     style={{
 
                         marginTop: 20,

@@ -23,6 +23,9 @@ import Order from "./screens/order";
 import Faq from "./screens/Faq";
 import Search from "./screens/search";
 import About from "./screens/About";
+import RecipeListScreen from "./screens/RecipeListScreen";
+import RecipeDetailsScreen from "./screens/RecipeDetailsScreen";
+
 
 // Navigator Declaration
 const Stack = createNativeStackNavigator();
@@ -35,6 +38,7 @@ const Tabs = () => {
     <Tab.Navigator
       screenOptions={({ route }) => ({
         tabBarIcon: ({ focused, color }) => {
+          
           let iconName;
           switch (route.name) {
             case "Home":
@@ -42,6 +46,9 @@ const Tabs = () => {
               break;
             case "Order":
               iconName = "list-outline";
+              break;
+            case "Resep":
+              iconName = "restaurant-outline";
               break;
             case "Cart":
               iconName = "cart-outline";
@@ -63,7 +70,7 @@ const Tabs = () => {
         },
         tabBarIconStyle: { marginTop: 5 },
         tabBarStyle: {
-          height: 80,
+          height: 100,
           borderTopWidth: 0,
         },
         tabBarLabel: ({ children, color, focused }) => {
@@ -79,7 +86,7 @@ const Tabs = () => {
 
       <Tab.Screen name="Home" component={Home} options={noHead} />
       <Tab.Screen name="Order" component={Order} options={noHead} />
-      <Tab.Screen name="Resep" component={Profile} options={noHead} />
+      <Tab.Screen name="Resep" component={RecipeListScreen} options={noHead} />
       <Tab.Screen name="Cart" component={Cartscreen} options={noHead} />
       <Tab.Screen name="Profil" component={Profile} options={noHead} />
 
@@ -92,49 +99,52 @@ const Tabs = () => {
 const App = () => {
   return (
     <>
-    <NativeBaseProvider>
-      <Provider store={store}>
-        <UserContext>
-        <NavigationContainer>
-          <Stack.Navigator>
-            <Stack.Screen name="Login" component={Login} options={noHead} />
-            <Stack.Screen name="Register" component={Register} options={noHead} />
+      <NativeBaseProvider>
+        <Provider store={store}>
+          <UserContext>
+            <NavigationContainer>
+              <Stack.Navigator>
+                <Stack.Screen name="Login" component={Login} options={noHead} />
+                <Stack.Screen name="Register" component={Register} options={noHead} />
 
-            <Stack.Screen name="Main"
-              component={Tabs}
-              options={noHead} />
-            <Stack.Screen name="Tabs" component={Tabs} options={noHead} />
-            <Stack.Screen name="Pembayaran" component={Pembayaran} options={noHead} />
-            <Stack.Screen name="Kategori" component={Kategori} />
-            <Stack.Screen name="Search" component={Search} />
-
-            <Stack.Screen
-              name="Address"
-              component={AddAddressScreen}
-              options={{ headerShown: false }}
-            />
-            <Stack.Screen
-              name="Add"
-              component={AddressScreen}
-              options={{ headerShown: false }}
-            />
-            <Stack.Screen name="Produkdetail" component={Produkdetail} />
-            <Stack.Screen name="Editprofil" component={Editprofil} />
-            <Stack.Screen name="Editaddress" component={Editaddress} />
-            <Stack.Screen name="Faq" component={Faq} />
-            <Stack.Screen name="About" component={About} />
+                <Stack.Screen name="Main"
+                  component={Tabs}
+                  options={noHead} />
+                <Stack.Screen name="Tabs" component={Tabs} options={noHead} />
+                <Stack.Screen name="Pembayaran" component={Pembayaran} options={noHead} />
+                <Stack.Screen name="Kategori" component={Kategori} />
+                <Stack.Screen name="Search" component={Search} />
 
 
-
-
+                <Stack.Screen
+                  name="Address"
+                  component={AddAddressScreen}
+                  options={{ headerShown: false }}
+                />
+                <Stack.Screen
+                  name="Add"
+                  component={AddressScreen}
+                  options={{ headerShown: false }}
+                />
+                <Stack.Screen name="Produkdetail" component={Produkdetail} options={noHead} />
+                <Stack.Screen name="Editprofil" component={Editprofil} />
+                <Stack.Screen name="Editaddress" component={Editaddress} />
+                <Stack.Screen name="Faq" component={Faq} />
+                <Stack.Screen name="About" component={About} />
+                <Stack.Screen name="RecipeDetail" component={RecipeDetailsScreen} />
 
 
 
-          </Stack.Navigator>
-        </NavigationContainer>
-        </UserContext>
-      </Provider>
-    </NativeBaseProvider>
+
+
+
+
+
+              </Stack.Navigator>
+            </NavigationContainer>
+          </UserContext>
+        </Provider>
+      </NativeBaseProvider>
     </>
   );
 };

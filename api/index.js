@@ -192,7 +192,7 @@ app.get("/get-products", async (req, res) => {
 
 //     const keyboard = req.query;
 //     const products = await Products.findOne((keyboard));
-    
+
 //     res.status(200).json(products);
 //   } catch (error) {
 //     res.status(500).json({ message: "Error retrieveing the addresses" });
@@ -201,6 +201,8 @@ app.get("/get-products", async (req, res) => {
 
 
 // /
+
+
 
 // //endpoint to get all the addresses of a particular user
 app.get("/addresses/:userId", async (req, res) => {
@@ -221,7 +223,6 @@ app.get("/addresses/:userId", async (req, res) => {
 
 
 
-
 //endpoint to store a new address to the backend
 app.post("/addresses", async (req, res) => {
   try {
@@ -238,7 +239,7 @@ app.post("/addresses", async (req, res) => {
 
     //save the updated user in te backend
     await user.save();
-    
+
     res.status(200).json({ message: "Address created Successfully" });
   } catch (error) {
     res.status(500).json({ message: "Error addding address" });
@@ -250,21 +251,21 @@ app.post("/addresses", async (req, res) => {
 app.post("/orders", async (req, res) => {
   try {
     const { userId, cartItems, totalPrice, shippingAddress, paymentMethod } =
-    req.body;
-    
+      req.body;
+
     const user = await User.findById(userId);
     if (!user) {
       return res.status(404).json({ message: "User not found" });
     }
-    
+
     //create an array of product objects from the cart Items
     const products = cartItems.map((item) => ({
       name: item.name,
       quantity: item.quantity,
       harga: item.harga,
-      image : item.image,
+      image: item.image,
     }));
-    
+
     //create a new Order
     const order = new Order({
       user: userId,
@@ -273,9 +274,9 @@ app.post("/orders", async (req, res) => {
       shippingAddress: shippingAddress,
       paymentMethod: paymentMethod,
     });
-    
+
     await order.save();
-    
+
     res.status(200).json({ message: "Order created successfully!" });
   } catch (error) {
     console.log("error creating orders", error);
@@ -287,13 +288,13 @@ app.post("/orders", async (req, res) => {
 app.get("/profile/:userId", async (req, res) => {
   try {
     const userId = req.params.userId;
-    
+
     const user = await User.findById(userId);
-    
+
     if (!user) {
       return res.status(404).json({ message: "User not found" });
     }
-    
+
     res.status(200).json({ user });
   } catch (error) {
     res.status(500).json({ message: "Error retrieving the user profile" });
@@ -302,36 +303,29 @@ app.get("/profile/:userId", async (req, res) => {
 
 app.put("/profileupdate/:userId", async (req, res) => {
   const userId = req.params.userId;
-  User.findByIdAndUpdate({ _id: userId }, {
+  User.findByIdAndUpdate(userId, {
     name: req.body.name,
     email: req.body.email,
   }).then(user => res.json(user))
-  .catch(err => res.json(err))
-})
-app.put("/addressesedit/:userId", async (req, res) => {
-  const userId = req.params.userId;
-  User.findOneAndUpdate({ addresses }, {
-    name: req.body.name,
-    email: req.body.noHp,
-  }).then(user => res.json(user))
-  .catch(err => res.json(err))
+    .catch(err => res.json(err))
 })
 
 
 
-app.get("/orders/:userId",async(req,res) => {
-  try{
+
+app.get("/orders/:userId", async (req, res) => {
+  try {
     const userId = req.params.userId;
 
-    const orders = await Order.find({user:userId}).populate("user");
+    const orders = await Order.find({ user: userId }).populate("user");
 
-    if(!orders || orders.length === 0){
-      return res.status(404).json({message:"No orders found for this user"})
+    if (!orders || orders.length === 0) {
+      return res.status(404).json({ message: "No orders found for this user" })
     }
 
     res.status(200).json({ orders });
-  } catch(error){
-    res.status(500).json({ message: "Error"});
+  } catch (error) {
+    res.status(500).json({ message: "Error" });
   }
 })
 

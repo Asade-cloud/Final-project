@@ -20,26 +20,24 @@ const Editprofil = () => {
 
     const handleUpdate = (e) => {
         e.preventDefault()
-        axios.put(`http://192.168.0.50:8000/profileupdate/${userId}`
+        axios.put(`http://10.217.21.121:8000/profileupdate/${userId}`
             , { name, email })
             .then(res => {
                 Alert.alert(
                     "Edit Berhasil",
-                    "You have been registered Successfully"
                   );
-                  
+                  navigation.navigate("Profil")
+
                 console.log(res);
             })
-            .catch(err => console.log(err))
-            Alert.alert(
-                "Registration Error",
-                "An error occurred while kons"
-              );
+              .catch((error) => {
+                Alert.alert("");
+                console.log(error);
+            });
     }
 
     return (
         <View>
-            <Text>{route.params.id} asdasd</Text>
             <Input
                 value={name}
                 onChangeText={(text) => setName(text)}
@@ -59,8 +57,10 @@ const Editprofil = () => {
 
                 }}
                 marginTop={3}
-                p={4} placeholder={route.params.id} />
-            <Button onPress={handleUpdate}> Login</Button>
+                p={4} placeholder={route.params.email} />
+            <Button 
+            backgroundColor={"green.400"}
+            onPress={handleUpdate}> Ganti Data</Button>
 
         </View>
     )

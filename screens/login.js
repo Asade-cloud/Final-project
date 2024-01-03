@@ -15,7 +15,7 @@ const Login = () => {
     const [password, setPassword] = useState("");
     const navigation = useNavigation();
     const [show, setShow] = React.useState(false);
-    
+
     useEffect(() => {
         const checkLoginStatus = async () => {
             try {
@@ -29,14 +29,14 @@ const Login = () => {
         };
         checkLoginStatus();
     }, []);
-    
+
     const handleLogin = () => {
         const user = {
             email: email,
             password: password
         };
-        
-        axios.post("http://192.168.100.114:8000/login", user)
+
+        axios.post("http://10.214.120.94:8000/login", user)
             .then((response) => {
                 console.log(response);
                 const token = response.data.token;
@@ -55,7 +55,7 @@ const Login = () => {
         <SafeAreaView style={{ flex: 1 }}>
             <VStack>
                 <Center >
-                    <Box w="full" h="400" backgroundColor={"amber.100"}>
+                    <Box w="full" h="400" >
                         <Center>
                             <Image
                                 source={require('../assets/logo.png')}
@@ -66,7 +66,7 @@ const Login = () => {
                             />
                         </Center>
                     </Box>
-                    <Heading>Login Ke Akunmu</Heading>
+                    <Heading paddingTop={5}>Login Ke Akunmu</Heading>
                     <Input
                         value={email}
                         onChangeText={(text) => setEmail(text)}
@@ -90,10 +90,16 @@ const Login = () => {
                         marginTop={3} p={4} type={show ? "text" : "password"} InputRightElement={<Pressable onPress={() => setShow(!show)}>
                             <Icon as={<MaterialIcons name={show ? "visibility" : "visibility-off"} />} size={5} mr="2" color="muted.400" />
                         </Pressable>} placeholder="Password" />
-                    <Box marginTop={3}>
-                        <Button onPress={handleLogin}> Login</Button>
-                        <Button onPress={() =>
-                            navigation.navigate("Register")}> Blm punya akun cuy</Button>
+                    <Box marginTop={3} >
+                        <Button onPress={handleLogin} 
+                        backgroundColor={"green.400"}
+                        borderRadius={20}
+                        > Login</Button>
+                        <Pressable
+                            onPress={() => navigation.navigate("Register")}
+                        >
+                            <Text paddingTop={8}> Belum punya akun ? Daftar </Text>
+                        </Pressable>
                     </Box>
                 </Center>
             </VStack>

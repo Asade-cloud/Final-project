@@ -29,9 +29,9 @@ const Home = () => {
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const response = await axios.get("http://192.168.100.114:8000/get-products");
+        const response = await axios.get("http://10.214.120.94:8000/get-products");
         setProducts(response.data);
-
+        console.log(response)
       } catch (error) {
         console.log("error fetching produk", error);
       }
@@ -47,7 +47,7 @@ const Home = () => {
         <ScrollView px={3}>
 
           <Box py={3}>
-           
+
 
             <Input placeholder="Apa Yang Anda Cari" w="100%" borderWidth={2} />
           </Box>
@@ -96,7 +96,9 @@ const Home = () => {
                           name: item.name,
                           harga: item.harga,
                           deskripsi: item.deskripsi,
-                          item: item.image,
+                          image: item.image,
+                          deskripsi: item.deskripsi,
+
                           item: item,
 
                         })
@@ -104,14 +106,14 @@ const Home = () => {
                     >
                       <Box borderWidth={"1"} rounded={20} p={3} w={"250"} mr={"4"} h={"220"} >
                         <Box backgroundColor={"amber.200"} h={'150'} w={"full"} >
-                        <Center>
-                          <Image
-                            source={{ uri: item.image }}
-                            w="full"
-                            h={"full"}
-                            alt="Image Data"
-                          />
-                        </Center>
+                          <Center>
+                            <Image
+                              source={{ uri: item.image }}
+                              w="full"
+                              h={"full"}
+                              alt="Image Data"
+                            />
+                          </Center>
                         </Box>
                         <Text fontSize={"xs"}>
                           Rp.

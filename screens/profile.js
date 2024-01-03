@@ -20,7 +20,7 @@ const Profile = () => {
     const fetchUserProfile = async () => {
       try {
         const response = await axios.get(
-          `http://192.168.0.50:8000/profile/${userId}`
+          `http://10.214.120.94:8000/profile/${userId}`
         );
         const { user } = response.data;
         setUser(user);
@@ -56,11 +56,13 @@ const Profile = () => {
         </VStack>
 
       </HStack>
-      <Box w="100%" h={20} backgroundColor="amber.200" p={3} marginTop={8}>
+      <Box w="100%" h={20} p={3} marginTop={8}>
         <Heading>Edit Profile</Heading>
         <HStack justifyContent={"space-between"}>
           <Text>Ubah Nama, Kata Sandi, Email</Text>
           < Ionicons
+            color={"green"}
+            size={25}
             onPress={() =>
               navigation.navigate("Editprofil", {
                 id: user._id,
@@ -72,45 +74,70 @@ const Profile = () => {
             name="arrow-forward" ></ Ionicons>
         </HStack>
       </Box>
-      <Box w="100%" h={20}  p={3} marginTop={8}>
+      <Box w="100%" h={20} p={3} marginTop={8}>
         <HStack justifyContent={"space-between"}>
-        <Heading>FAQ</Heading>
+          <Heading>FAQ</Heading>
           <TouchableOpacity
-          onPress={() =>
-            navigation.navigate("Faq")
-          }>
+            onPress={() =>
+              navigation.navigate("Faq")
+            }>
 
-          < Ionicons
-            name="arrow-forward" ></ Ionicons>
+            < Ionicons
+              color={"green"}
+              size={25}
+
+              name="arrow-forward" ></ Ionicons>
           </TouchableOpacity>
         </HStack>
       </Box>
-      <Box w="100%" h={20} backgroundColor="amber.200" p={3} marginTop={8}>
-        <HStack justifyContent={"space-between"}>
-        <Heading>About Us</Heading>
-        <TouchableOpacity
-          onPress={() =>
-            navigation.navigate("About")
-          }>
 
-          < Ionicons
-            name="arrow-forward" ></ Ionicons>
+      <Box w="100%" h={20} p={3} marginTop={8}>
+        <HStack justifyContent={"space-between"}>
+          <Heading>Hubungi Kami</Heading>
+          
+          <TouchableOpacity
+            onPress={() =>
+              navigation.navigate("About")
+            }>
+
+
+            < Ionicons
+              color={"green"}
+              size={25}
+              name="arrow-forward" ></ Ionicons>
+          </TouchableOpacity>
+        </HStack>
+        <Text>Kirim Email Ke Kita</Text>
+
+      </Box>
+      <Box w="100%" h={20} p={3} marginTop={8}>
+        <HStack justifyContent={"space-between"}>
+          <Heading>About Us</Heading>
+          <TouchableOpacity
+            onPress={() =>
+              navigation.navigate("About")
+            }>
+
+            < Ionicons
+              color={"green"}
+              size={25}
+              name="arrow-forward" ></ Ionicons>
           </TouchableOpacity>
         </HStack>
       </Box>
-      <Box w="100%" h={20} backgroundColor="amber.200" p={3} marginTop={8}>
+      <Box w="100%" h={20} p={3} marginTop={8}>
         <HStack justifyContent={"space-between"}>
-          <Pressable
+          <Button
+            backgroundColor={"green.400"}
             onPress={logout}
             style={{
               padding: 10,
-              backgroundColor: "#E0E0E0",
               borderRadius: 25,
               flex: 1,
             }}
           >
             <Text style={{ textAlign: "center" }}>Logout</Text>
-          </Pressable>
+          </Button>
 
         </HStack>
       </Box>

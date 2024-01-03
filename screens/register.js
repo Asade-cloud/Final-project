@@ -1,4 +1,4 @@
-import { Heading, Image, Text, HStack, VStack, Center} from "native-base";
+import { Heading, Image, Text, HStack, VStack, Center } from "native-base";
 import { Box, ScrollView, Input, Icon, Pressable, Button } from "native-base";
 import { useNavigation } from "@react-navigation/native";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -24,38 +24,46 @@ const Register = () => {
 
 
         //axios
-        axios.post("http://192.168.1.11:8000/register", user)
-    .then((response) => {
-      console.log(response);
-      Alert.alert(
-        "Registration successful",
-        "You have been registered Successfully"
-      );
-      setName("");
-      setEmail("");
-      setPassword("");
-    })
-    .catch((error) => {
-      Alert.alert(
-        "Registration Error",
-        "An error occurred while kons"
-      );
-      console.log("registration failed", error);
-    });
+        axios.post("http://10.217.21.121:8000/register", user)
+            .then((response) => {
+                console.log(response);
+                Alert.alert(
+                    "Registration successful",
+                    "You have been registered Successfully"
+                );
+                setName("");
+                setEmail("");
+                setPassword("");
+            })
+            .catch((error) => {
+                Alert.alert(
+                    "Registration Error",
+                    "An error occurred while kons"
+                );
+                console.log("registration failed", error);
+            });
 
     }
 
     //api
-    
+
 
     return (
         <SafeAreaView style={{ flex: 1 }}>
             <VStack>
                 <Center >
-                    <Box w="100" h="200" backgroundColor={"amber.100"}>
-                        <Heading>Logo</Heading>
+                    <Box w="full" h="400" >
+                        <Center>
+                            <Image
+                                source={require('../assets/logo.png')}
+                                w="full"
+                                h="full"
+                                rounded="lg"
+                                alt="imagepn"
+                            />
+                        </Center>
                     </Box>
-                    <Heading>Daftar Akun</Heading>
+                    <Heading paddingTop={5}>Daftar Akun</Heading>
                     <Input
                         value={name}
                         onChangeText={(text) => setName(text)}
@@ -88,8 +96,13 @@ const Register = () => {
                         marginTop={3} p={4} type={show ? "text" : "password"} InputRightElement={<Pressable onPress={() => setShow(!show)}>
                             <Icon as={<MaterialIcons name={show ? "visibility" : "visibility-off"} />} size={5} mr="2" color="muted.400" />
                         </Pressable>} placeholder="Password" />
-                    <Box marginTop={3}>
-                        <Button onPress={handleRegister}> Daftar</Button>
+                    <Box marginTop={3}
+                    >
+                        <Button onPress={handleRegister}
+                            backgroundColor={"green.400"}
+                            borderRadius={20}
+                            w={80}
+                        > Daftar</Button>
                     </Box>
                     <Pressable
                         onPress={() => navigation.goBack()}
