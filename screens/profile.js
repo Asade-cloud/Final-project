@@ -68,14 +68,18 @@ const Profile = () => {
                 id: user._id,
                 name: user.name,
                 email: user.email
+
               })
             }
             name="arrow-forward" ></ Ionicons>
         </HStack>
       </Box>
       <Box w="100%" h={20} p={3} marginTop={8}>
-        <HStack justifyContent={"space-between"}>
           <Heading>FAQ</Heading>
+        <HStack justifyContent={"space-between"}>
+          <Text>
+            Pertanyaan
+          </Text>
           <TouchableOpacity
             onPress={() =>
               navigation.navigate("Faq")
@@ -96,7 +100,7 @@ const Profile = () => {
           
           <TouchableOpacity
             onPress={() =>
-              navigation.navigate("About")
+              navigation.navigate("Hubungikami")
             }>
 
 
@@ -106,7 +110,7 @@ const Profile = () => {
               name="arrow-forward" ></ Ionicons>
           </TouchableOpacity>
         </HStack>
-        <Text>Kirim Email Ke Kita</Text>
+        <Text>Ada keluhan apa?</Text>
 
       </Box>
       <Box w="100%" h={20} p={3} marginTop={8}>

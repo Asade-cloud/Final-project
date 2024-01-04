@@ -132,7 +132,6 @@ const Home = () => {
                           deskripsi: item.deskripsi,
                           image: item.image,
                           deskripsi: item.deskripsi,
-
                           item: item,
 
                         })

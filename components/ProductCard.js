@@ -6,12 +6,18 @@ import { SafeAreaView } from "react-native-safe-area-context";
 
 const ProductCard = ({ category }) => {
     const navigation = useNavigation();
-    console.log("item: ", category)
     return (
         <SafeAreaView>
             <TouchableOpacity
                 onPress={() =>
-                    navigation.navigate("Produkdetail", { category: category })
+                    navigation.navigate("Produkdetail", { 
+                        id: category._id,
+                        name: category.name,
+                        harga: category.harga,
+                        deskripsi: category.deskripsi,
+                        image: category.image,
+                        category: category
+                    })
                 }
             >
                 <Box h="280" w="180" backgroundColor="white" rounded="md" shadow={5} borderWidth={2}>

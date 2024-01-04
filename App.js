@@ -21,7 +21,6 @@ import Editprofil from "./screens/editprofil";
 import Editaddress from "./screens/editaddress";
 import Order from "./screens/order";
 import Faq from "./screens/Faq";
-import Search from "./screens/search";
 import About from "./screens/About";
 import RecipeListScreen from "./screens/RecipeListScreen";
 import RecipeDetailsScreen from "./screens/RecipeDetailsScreen";
@@ -113,7 +112,6 @@ const App = () => {
                 <Stack.Screen name="Tabs" component={Tabs} options={noHead} />
                 <Stack.Screen name="Pembayaran" component={Pembayaran} options={noHead} />
                 <Stack.Screen name="Kategori" component={Kategori} />
-                <Stack.Screen name="Search" component={Search} />
 
 
                 <Stack.Screen
