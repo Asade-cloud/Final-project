@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet,  View } from 'react-native'
 import { ScrollView } from 'native-base'
 import { TouchableOpacity } from 'react-native'
 import { Box, Center, HStack, VStack, Heading } from 'native-base'
@@ -8,6 +8,7 @@ import { SafeAreaView } from 'react-native-safe-area-context'
 import axios from 'axios'
 import { UserType } from '../UserContext'
 import { Image } from 'native-base'
+import { Text } from 'native-base'
 
 
 
@@ -21,7 +22,7 @@ const Order = () => {
     const fetchOrder = async () => {
         try {
             const response = await axios.get(
-                `http://10.214.120.94:8000/orders/${userId}`
+                `http://192.168.18.242:8000/orders/${userId}`
             );
             const orders = response.data.orders;
             setOrders(orders);
@@ -51,7 +52,9 @@ const Order = () => {
                                                     {order.shippingAddress.name}
                                                 </Text>
 
-                                                <Text>.</Text>
+                                                <Text
+                                                color="blue.400"
+                                                >{order.status}</Text>
                                             </HStack>
                                             {order.products.slice(0, 1).map((product) => (
                                                 <HStack paddingTop={3} key={product._id}>

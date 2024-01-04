@@ -25,7 +25,7 @@ const Home = () => {
           setSearchResult([])
           return
         }
-        const res = await axios.get("http://10.214.120.94:8000/search-products",{ params: { key: key, limit: 5 } })
+        const res = await axios.get("http://192.168.18.242:8000/search-products",{ params: { key: key, limit: 5 } })
         setSearchResult(res.data.data)
       } catch (err) {
         console.log(err)
@@ -49,7 +49,7 @@ const Home = () => {
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const response = await axios.get("http://10.214.120.94:8000/get-products");
+        const response = await axios.get("http://192.168.18.242:8000/get-products");
         setProducts(response.data);
       } catch (error) {
         console.log("error fetching produk", error);

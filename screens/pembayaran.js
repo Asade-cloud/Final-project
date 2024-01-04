@@ -34,7 +34,7 @@ const Pembayaran = () => {
   const fetchAddresses = async () => {
     try {
       const response = await axios.get(
-        `http://10.214.120.94:8000/addresses/${userId}`
+        `http://192.168.18.242:8000/addresses/${userId}`
       );
       const { addresses } = response.data;
 
@@ -58,10 +58,11 @@ const Pembayaran = () => {
         totalPrice: total,
         shippingAddress: selectedAddress,
         paymentMethod: selectedOption,
+        status : "Terbayar",
       };
       console.log(orderData)
       const response = await axios.post(
-        "http://10.214.120.94:8000/orders",
+        "http://192.168.18.242:8000/orders",
         orderData
       );
       if (response.status === 200) {
@@ -87,7 +88,7 @@ const Pembayaran = () => {
             justifyContent: "space-between",
           }}
         >
-          {steps?.map((step, index) => (
+          {steps.map((step, index) => (
             <View style={{ justifyContent: "center", alignItems: "center" }}>
               {index > 0 && (
                 <View
@@ -154,6 +155,7 @@ const Pembayaran = () => {
           <Pressable>
             {addresses.map((item, index) => (
               <Pressable
+                key={index}
                 style={{
                   borderWidth: 1,
                   borderColor: "#D0D0D0",

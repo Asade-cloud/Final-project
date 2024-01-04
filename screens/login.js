@@ -36,7 +36,7 @@ const Login = () => {
             password: password
         };
 
-        axios.post("http://10.214.120.94:8000/login", user)
+        axios.post("http://192.168.18.242:8000/login", user)
             .then((response) => {
                 console.log(response);
                 const token = response.data.token;

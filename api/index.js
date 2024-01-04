@@ -254,7 +254,7 @@ app.post("/addresses", async (req, res) => {
 //endpoint to store all the orders
 app.post("/orders", async (req, res) => {
   try {
-    const { userId, cartItems, totalPrice, shippingAddress, paymentMethod } =
+    const { userId, cartItems, totalPrice, shippingAddress, paymentMethod,status } =
       req.body;
 
     const user = await User.findById(userId);
@@ -277,6 +277,7 @@ app.post("/orders", async (req, res) => {
       totalPrice: totalPrice,
       shippingAddress: shippingAddress,
       paymentMethod: paymentMethod,
+      status : status ,
     });
 
     await order.save();
